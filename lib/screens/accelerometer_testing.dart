@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:accelerometer/accelerometer.dart';
 
-
+// Looks like I am done with this.
 class AccelerometerTesting extends StatefulWidget {
   @override
   _AccelerometerTestingState createState() => _AccelerometerTestingState();
@@ -27,7 +27,7 @@ List<double> applyHighPassFilter(final List<double> vector) {
   return filteredVector;
 }
 
-int calculateInclination(final AccelerometerEvent acceleration) {
+int calculateInclinationOfZ(final AccelerometerEvent acceleration) {
   final double accelerationNormal =
       math.sqrt(
         (acceleration.x * acceleration.x)
@@ -38,6 +38,21 @@ int calculateInclination(final AccelerometerEvent acceleration) {
   return
     radianToDegrees(
       math.acos(acceleration.z / accelerationNormal),
+    )
+      .round();
+}
+
+int calculateInclinationOfX(final AccelerometerEvent acceleration) {
+  final double accelerationNormal =
+      math.sqrt(
+        (acceleration.x * acceleration.x)
+        + (acceleration.y * acceleration.y)
+        + (acceleration.z * acceleration.z),
+      );
+
+  return
+    radianToDegrees(
+      math.acos(acceleration.x / accelerationNormal),
     )
       .round();
 }
@@ -80,7 +95,8 @@ class _AccelerometerTestingState extends State<AccelerometerTesting> {
                 Text("  x: ${rampedAcceleration[0]}"),
                 Text("  y: ${rampedAcceleration[1]}"),
                 Text("  z: ${rampedAcceleration[2]}"),
-                Text("Current inclination is: ${calculateInclination(event)}"),
+                Text("Inclination of Z is: ${calculateInclinationOfZ(event)}"),
+                Text("Inclination of X is: ${calculateInclinationOfX(event)}"),
                 SizedBox(width: double.infinity),
               ],
             );

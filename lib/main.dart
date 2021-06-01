@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:lenticulate/screens/accelerometer_testing.dart';
+import 'screens/lenticular_wallpaper.dart';
 
 
 void main() {
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Lenticulate",
-      home: AccelerometerTesting(),
+      home: LenticularWallpaper(),
     );
   }
 }
